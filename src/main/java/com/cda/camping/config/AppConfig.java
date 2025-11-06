@@ -39,12 +39,10 @@ public class AppConfig {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         // Driver JDBC pour MySQL
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        // URL de connexion : localhost, port 3306, base de données "camping_spring"
-        dataSource.setUrl("jdbc:mysql://localhost:3306/camping_spring");
-        // Identifiants de connexion (À CHANGER en production !)
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/camping");
+        dataSource.setUsername("postgres");
+        dataSource.setPassword("admin");
         return dataSource;
     }
 
