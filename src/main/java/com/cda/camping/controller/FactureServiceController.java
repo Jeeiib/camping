@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RestController
 @RequestMapping("/api/factures_services")
 public class FactureServiceController {
 
