@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.cda.camping.model.Client;
 import com.cda.camping.service.ClientService;
@@ -35,6 +36,7 @@ import com.cda.camping.service.ClientService;
  * - DELETE /api/clients/{id} -> Supprime un client
  */
 @Controller
+@RestController
 @RequestMapping("/api/clients")
 public class ClientController {
 

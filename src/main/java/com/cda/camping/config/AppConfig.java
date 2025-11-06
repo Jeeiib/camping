@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.cda.camping")
+@ComponentScan(basePackages = {"com.cda.camping", "org.springdoc"})
 public class AppConfig {
 
     /**
