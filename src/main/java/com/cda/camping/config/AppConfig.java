@@ -9,7 +9,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import com.fasterxml.jackson.databind.ObjectMapper; 
+
+
 
 /**
  * Classe de configuration Spring
@@ -71,6 +76,17 @@ public class AppConfig {
     @Bean
     public ObjectMapper objectMapper() {
         return new ObjectMapper();
+    }
+        /**
+     * Configure l'encodeur de mots de passe
+     *
+     * BCrypt est l'implémentation recommandée pour le hachage de mots de passe.
+     * Il est sécurisé car il inclut un "sel" aléatoire pour chaque mot de passe.
+     * @return un bean PasswordEncoder
+     */
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 }
