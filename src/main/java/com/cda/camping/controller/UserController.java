@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import com.cda.camping.service.JWTService;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private JWTService jwtService;
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Integer id) {
@@ -66,7 +69,9 @@ public class UserController {
         headers.set(HttpHeaders.CONTENT_TYPE, "application/json");
         boolean check = userService.checkLogin(user.getLogin(), user.getPassword());
         if (check) {
-            return new ResponseEntity<>("{message: 'Login avec succès'}", headers, HttpStatus.OK);
+            User userDetails = userService.findByLogin(user.getLogin());
+            String token = jwtService.generateToken(userDetails);
+            return new ResponseEntity<>("{\"token\": \"" + token + "\"}", headers, HttpStatus.OK);
         } else {
             return new ResponseEntity<>("{message: 'Login ou mot de passe incorrect'}", headers, HttpStatus.UNAUTHORIZED);
         }
