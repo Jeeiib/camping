@@ -9,7 +9,12 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import com.fasterxml.jackson.databind.ObjectMapper; 
+
+
 
 /**
  * Classe de configuration Spring
@@ -24,7 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.cda.camping")
+@ComponentScan(basePackages = {"com.cda.camping", "org.springdoc"})
 public class AppConfig {
 
     /**
@@ -39,12 +44,10 @@ public class AppConfig {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         // Driver JDBC pour MySQL
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        // URL de connexion : localhost, port 3306, base de données "camping_spring"
-        dataSource.setUrl("jdbc:mysql://localhost:3306/camping_spring");
-        // Identifiants de connexion (À CHANGER en production !)
-        dataSource.setUsername("root");
-        dataSource.setPassword("root");
+        dataSource.setDriverClassName("org.postgresql.Driver");
+        dataSource.setUrl("jdbc:postgresql://localhost:5432/camping");
+        dataSource.setUsername("postgres");
+        dataSource.setPassword("admin");
         return dataSource;
     }
 
@@ -73,6 +76,17 @@ public class AppConfig {
     @Bean
     public ObjectMapper objectMapper() {
         return new ObjectMapper();
+    }
+        /**
+     * Configure l'encodeur de mots de passe
+     *
+     * BCrypt est l'implémentation recommandée pour le hachage de mots de passe.
+     * Il est sécurisé car il inclut un "sel" aléatoire pour chaque mot de passe.
+     * @return un bean PasswordEncoder
+     */
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 
 }
