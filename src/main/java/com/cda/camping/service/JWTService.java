@@ -18,7 +18,7 @@ public class JWTService {
 
     // ATTENTION: La clé secrète doit être beaucoup plus longue et complexe en production,
     // et stockée de manière sécurisée (ex: dans les variables d'environnement ou un vault).
-    private static final String SECRET_KEY = "une_super_cle_secrete_tres_longue_pour_eviter_les_problemes_de_securite";
+    private static final String SECRET_KEY = "yDrbKwmEFabR9Q1VQN7n0RJ4tvFvgZS75qctD26cT7ZCveNGiAyKX7wb8gYy54zkBaDlvxi3UhJGKbYBmmZZkQ==";
     private static final long EXPIRATION_TIME = 1000 * 60 * 60 * 24; // 24 heures
 
     /**
